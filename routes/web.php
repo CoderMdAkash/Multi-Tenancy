@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\Route;
 
-if(url('/') == 'http://localhost:8000'){
 Route::get('/', function () {
+    $products = Product::all();  
     return view('welcome');
 });
 
@@ -20,5 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/tenants', TenantController::class);
 });
 
+Route::get('/browse_movies', [MovieController::class, 'show']);
+
 require __DIR__.'/auth.php';
-}
